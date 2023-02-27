@@ -131,7 +131,7 @@ def test_db():
     conn.close()  # Close the database connection after the test completes
 
 
-# Create a test to make sure the data initialized in the database is correct
+# Create an xfail test to make sure data was initialized correclty
 
 @pytest.mark.xfail(reason= "This is the newly added pytest fixture test,  Failure was expected")
 def test_fish_count(test_db):
@@ -144,9 +144,9 @@ def test_fish_count(test_db):
 
     count = c.execute("SELECT COUNT(*) FROM fish").fetchone()[0]
 
-    # Assert the count is 2, as expected 
+    # Assert the count is 2, as expected - through xfail assertion that count is 3
 
-    assert count == 3
+    assert count == 3, f'Expected 2 and got {count}.'
 
 
 #######################################################################################################################
